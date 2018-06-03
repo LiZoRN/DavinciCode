@@ -55,16 +55,16 @@ export default class BasicProfile extends Component {
 
   render() {
     const { profile, loading } = this.props;
-    const { basicGoods, basicProgress } = profile;
-    let goodsData = [];
-    if (basicGoods.length) {
+    const { basicProposals, basicProgress } = profile;
+    let proposalsData = [];
+    if (basicProposals.length) {
       let num = 0;
       let amount = 0;
-      basicGoods.forEach(item => {
+      basicProposals.forEach(item => {
         num += Number(item.num);
         amount += Number(item.amount);
       });
-      goodsData = basicGoods.concat({
+      proposalsData = basicProposals.concat({
         id: '总计',
         num,
         amount,
@@ -75,18 +75,18 @@ export default class BasicProfile extends Component {
         children: value,
         props: {},
       };
-      if (index === basicGoods.length) {
+      if (index === basicProposals.length) {
         obj.props.colSpan = 0;
       }
       return obj;
     };
-    const goodsColumns = [
+    const proposalsColumns = [
       {
         title: '商品编号',
         dataIndex: 'id',
         key: 'id',
         render: (text, row, index) => {
-          if (index < basicGoods.length) {
+          if (index < basicProposals.length) {
             return <a href="">{text}</a>;
           }
           return {
@@ -122,7 +122,7 @@ export default class BasicProfile extends Component {
         key: 'num',
         align: 'right',
         render: (text, row, index) => {
-          if (index < basicGoods.length) {
+          if (index < basicProposals.length) {
             return text;
           }
           return <span style={{ fontWeight: 600 }}>{text}</span>;
@@ -134,7 +134,7 @@ export default class BasicProfile extends Component {
         key: 'amount',
         align: 'right',
         render: (text, row, index) => {
-          if (index < basicGoods.length) {
+          if (index < basicProposals.length) {
             return text;
           }
           return <span style={{ fontWeight: 600 }}>{text}</span>;
@@ -164,8 +164,8 @@ export default class BasicProfile extends Component {
             style={{ marginBottom: 24 }}
             pagination={false}
             loading={loading}
-            dataSource={goodsData}
-            columns={goodsColumns}
+            dataSource={proposalsData}
+            columns={proposalsColumns}
             rowKey="id"
           />
           <div className={styles.title}>退货进度</div>

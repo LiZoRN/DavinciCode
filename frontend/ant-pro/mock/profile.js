@@ -1,4 +1,4 @@
-const basicGoods = [
+const basicProposals = [
   {
     id: '1234561',
     name: '矿泉水 550ml',
@@ -142,7 +142,7 @@ const advancedOperation3 = [
 ];
 
 export const getProfileBasicData = {
-  basicGoods,
+  basicProposals,
   basicProgress,
 };
 
