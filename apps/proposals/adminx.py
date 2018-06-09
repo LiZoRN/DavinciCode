@@ -2,7 +2,7 @@
 
 import xadmin
 from .models import Proposals, ProposalsCategory, ProposalsImage, ProposalsCategoryBrand, Banner, HotSearchWords
-from .models import IndexAd
+from .models import IndexAd, ProposalOptions
 
 class ProposalsAdmin(object):
     #显示的列
@@ -16,13 +16,19 @@ class ProposalsAdmin(object):
     #富文本编辑器
     style_fields = {"proposals_desc": "ueditor"}
 
-    #在添加商品的时候可以添加商品图片
+    #在添加商品的时候可以添加投票图片
     class ProposalsImagesInline(object):
         model = ProposalsImage
         exclude = ["create_time"]
         extra = 1
         style = 'tab'
-    inlines = [ProposalsImagesInline]
+
+    class ProposalsOptionsInline(object):
+        model = ProposalOptions
+        exclude = ["create_time"]
+        extra = 3
+        style = 'tab'
+    inlines = [ProposalsImagesInline,ProposalsOptionsInline]
 
 
 class ProposalsCategoryAdmin(object):
@@ -44,7 +50,7 @@ class ProposalsBrandAdmin(object):
 
 
 class BannerProposalsAdmin(object):
-    list_display = ["Proposals", "image", "index"]
+    list_display = ["proposals", "image", "index"]
 
 
 class HotSearchAdmin(object):
@@ -52,14 +58,14 @@ class HotSearchAdmin(object):
 
 
 class IndexAdAdmin(object):
-    list_display = ["category", "Proposals"]
+    list_display = ["category", "proposals"]
 
 
 xadmin.site.register(Proposals, ProposalsAdmin)
 xadmin.site.register(ProposalsCategory, ProposalsCategoryAdmin)
 xadmin.site.register(Banner, BannerProposalsAdmin)
-xadmin.site.register(ProposalsCategoryBrand, ProposalsBrandAdmin)
-
+# 提案方，先注释
+# xadmin.site.register(ProposalsCategoryBrand, ProposalsBrandAdmin)
 xadmin.site.register(HotSearchWords, HotSearchAdmin)
 xadmin.site.register(IndexAd, IndexAdAdmin)
 

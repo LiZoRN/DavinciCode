@@ -22,8 +22,8 @@ class YunPian(object):
         return re_dict
 
 if __name__ == "__main__":
-    yun_pian = YunPian("2e87d17327d4be01608f7c6da23ecea2")
-    yun_pian.send_sms("2018", "手机号码")
+    yun_pian = YunPian("0e4a89d13c0fb264b8d128ed979e13c2")
+    yun_pian.send_sms("2018", "18057480023")
 
 
 

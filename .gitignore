@@ -108,3 +108,5 @@ node_modules/
 dist/
 npm-debug.log
 .idea/
+extra_apps/rest_framework/locale/
+static/

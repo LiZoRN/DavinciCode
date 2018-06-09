@@ -28,7 +28,16 @@ SECRET_KEY = '&-!=%u)ovmos1ziqni9u5f1#^-r9lt(obc#ne7#us#*o$$yqz2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+# 设置邮箱和用户名和手机号均可登录
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackend',
+    'social_core.backends.weibo.WeiboOAuth2',
+    'social_core.backends.qq.QQOAuth2',
+    'social_core.backends.weixin.WeixinOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 #重载系统的用户，让UserProfile生效
 AUTH_USER_MODEL = 'users.UserProfile'
@@ -72,9 +81,9 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ORIGIN_WHITELIST = (
-#     'localhost:8000',
-# )
+CORS_ORIGIN_WHITELIST = (
+    '127.0.0.1:3000'
+)
 
 ROOT_URLCONF = 'DavinciCode.urls'
 
@@ -140,12 +149,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'zh-hans'
 
+# 时区改为上海
 TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
+# 数据库存储使用时间，True时间会被存为UTC的时间
 USE_TZ = False
 
 

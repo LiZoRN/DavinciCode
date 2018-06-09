@@ -2,10 +2,10 @@
 __author__ = 'lizorn'
 
 import xadmin
-from .models import UserProposal, UserProposalOption
+from .models import OrderInfo, OrderProposalTokens, OrderOptionsTokens
 
 
-class UserProposalAdmin(object):
+class OrderInfoAdmin(object):
     list_display = ["user", "proposals", "token_nums", ]
     # class TokensTradeInline(object):
     #     model = TokensTrade
@@ -13,13 +13,19 @@ class UserProposalAdmin(object):
     #     extra = 1
     #     style = 'tab'
 
-    class UserProposalOptionInline(object):
-        model = UserProposalOption
+    class UserProposalInline(object):
+        model = OrderProposalTokens
         exclude = ['create_time', ]
         extra = 1
         style = 'tab'
 
-    inlines = [UserProposalOption, ]
+    class UserProposalOptionInline(object):
+        model = OrderOptionsTokens
+        exclude = ['create_time', ]
+        extra = 1
+        style = 'tab'
+
+    inlines = [UserProposalInline, UserProposalOptionInline,]
 
 
-xadmin.site.register(UserProposal, UserProposalAdmin)
+xadmin.site.register(OrderInfo, OrderInfoAdmin)

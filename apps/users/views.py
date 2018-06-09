@@ -39,7 +39,7 @@ class CustomBackend(ModelBackend):
 
 class SmsCodeViewset(CreateModelMixin,viewsets.GenericViewSet):
     '''
-    手机验证码
+    手机验证服务
     '''
     serializer_class = SmsSerializer
 
@@ -119,7 +119,6 @@ class UserViewset(CreateModelMixin,mixins.RetrieveModelMixin,mixins.UpdateModelM
             return UserDetailSerializer
         elif self.action == "create":
             return UserRegSerializer
-
         return UserDetailSerializer
 
     #虽然继承了Retrieve可以获取用户详情，但是并不知道用户的id，所有要重写get_object方法

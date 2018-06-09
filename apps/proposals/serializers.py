@@ -38,22 +38,32 @@ class ProposalsImageSerializer(serializers.ModelSerializer):
         model = ProposalsImage
         fields = ("image",)
 
+# 投票选项
+class ProposalsOptionsSerializer(serializers.ModelSerializer):
+    # 覆盖外键字段
+    # proposals = ProposalsSerializer()
+
+    class Meta:
+        model = ProposalOptions
+        fields = '__all__'
+
+# 投票列表页
+class ProposalSerializer(serializers.ModelSerializer):
+    # 覆盖外键字段
+    category = CategorySerializer()
+    class Meta:
+        model = Proposals
+        fields = '__all__'
+
 #投票列表页
 class ProposalsSerializer(serializers.ModelSerializer):
     #覆盖外键字段
     category = CategorySerializer()
     #images是数据库中设置的related_name="images"
     images = ProposalsImageSerializer(many=True)
+    options = ProposalsOptionsSerializer(many=True)
     class Meta:
         model = Proposals
-        fields = '__all__'
-
-#投票选项
-class ProposalsOptionsSerializer(serializers.ModelSerializer):
-    #覆盖外键字段
-    proposals = ProposalsSerializer()
-    class Meta:
-        model = ProposalOptions
         fields = '__all__'
 
 
